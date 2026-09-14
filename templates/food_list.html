@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Donations</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🍱 Available Surplus Food</h2>
+
+    {% if foods %}
+
+    <table>
+
+        <tr>
+            <th>Food</th>
+            <th>Quantity</th>
+            <th>Location</th>
+            <th>Status</th>
+        </tr>
+
+        {% for food in foods %}
+
+        <tr>
+            <td>{{ food["food_name"] }}</td>
+            <td>{{ food["quantity"] }}</td>
+            <td>{{ food["location"] }}</td>
+            <td>{{ food["status"] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+    <p>No food donations available.</p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="/dashboard">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>
