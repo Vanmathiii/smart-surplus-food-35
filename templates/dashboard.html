@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
 
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Welcome, {{ username }} 👋</h1>
+
+    <h3>Role: {{ role }}</h3>
+
+    <div class="menu">
+
+        <a href="/donate" class="btn">
+            🍛 Donate Surplus Food
+        </a>
+
+        <a href="/food" class="btn">
+            📋 View Food Donations
+        </a>
+
+        <a href="/logout" class="btn logout">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
