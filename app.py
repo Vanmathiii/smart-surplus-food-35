@@ -40,18 +40,14 @@ def init_db():
     if "donor_username" not in columns:
         conn.execute("ALTER TABLE food ADD COLUMN donor_username TEXT")
 
-    # Prototype admin account. Existing users are not changed.
-     # Prototype admin account
-     conn.execute("""
-        INSERT INTO users (username, password, role)
-        VALUES (?, ?, ?)
-        ON CONFLICT(username) DO UPDATE SET
-            password = excluded.password,
-            role = excluded.role
-      """, ("admin", "admin123", "Admin"))
-
-init_db()
-
+        # Prototype admin account
+        conn.execute("""
+             INSERT INTO users (username, password, role)
+             VALUES (?, ?, ?)
+             ON CONFLICT(username) DO UPDATE SET
+                 password = excluded.password,
+                 role = excluded.role
+        """, ("admin", "admin123", "Admin"))
 
 # ---------------- USER AUTH ----------------
 @app.route("/")
