@@ -41,13 +41,13 @@ def init_db():
         conn.execute("ALTER TABLE food ADD COLUMN donor_username TEXT")
 
         # Prototype admin account
-        conn.execute("""
-             INSERT INTO users (username, password, role)
-             VALUES (?, ?, ?)
-             ON CONFLICT(username) DO UPDATE SET
-                 password = excluded.password,
-                 role = excluded.role
-        """, ("admin", "admin123", "Admin"))
+    conn.execute("""
+         INSERT INTO users (username, password, role)
+         VALUES (?, ?, ?)
+         ON CONFLICT(username) DO UPDATE SET
+             password = excluded.password,
+             role = excluded.role
+    """, ("admin", "admin123", "Admin"))
 
 # ---------------- USER AUTH ----------------
 @app.route("/")
