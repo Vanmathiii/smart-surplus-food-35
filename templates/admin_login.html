@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Admin Login | Smart Surplus{% endblock %}
+{% block content %}
+<section class="admin-login">
+    <div class="shield">🛡️</div><span class="eyebrow">ADMINISTRATION</span><h1>Control the <em>food flow.</em></h1><p>Manage donations, users and redistribution status from one place.</p>
+    <div class="form-card">
+        <form method="POST"><label>Admin Username</label><input type="text" name="username" placeholder="Admin username" required><label>Password</label><input type="password" name="password" placeholder="Admin password" required><button class="btn btn-primary full" type="submit">Enter Admin Dashboard →</button></form>
+        <div class="demo-note"><strong>Prototype credentials</strong><br>Username: <b>admin</b> &nbsp; Password: <b>admin123</b></div>
+    </div>
+</section>
+{% endblock %}

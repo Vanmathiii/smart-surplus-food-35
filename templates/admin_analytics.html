@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Analytics | Smart Surplus{% endblock %}
+{% block content %}
+<section class="dashboard-head"><div><span class="eyebrow">ADMIN • ANALYTICS</span><h1>Impact Analytics 📈</h1><p>A simple overview of donation and community activity.</p></div></section>
+<div class="analytics-grid">
+    <div class="chart-card"><span class="eyebrow">DONATION STATUS</span><h2>Food redistribution pipeline</h2>
+        <div class="bars">
+            <div><span>Available</span><div><i style="width: {{ (available / total * 100) if total else 0 }}%"></i></div><b>{{ available }}</b></div>
+            <div><span>Approved</span><div><i style="width: {{ (approved / total * 100) if total else 0 }}%"></i></div><b>{{ approved }}</b></div>
+            <div><span>Collected</span><div><i style="width: {{ (collected / total * 100) if total else 0 }}%"></i></div><b>{{ collected }}</b></div>
+            <div><span>Rejected</span><div><i style="width: {{ (rejected / total * 100) if total else 0 }}%"></i></div><b>{{ rejected }}</b></div>
+        </div>
+    </div>
+    <div class="chart-card"><span class="eyebrow">COMMUNITY</span><h2>Registered roles</h2><div class="role-stat"><strong>{{ donor_count }}</strong><span>Donors</span></div><div class="role-stat"><strong>{{ receiver_count }}</strong><span>Receivers</span></div><div class="total-line">Total donations: <b>{{ total }}</b></div></div>
+</div>
+{% endblock %}

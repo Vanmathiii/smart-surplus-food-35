@@ -1,49 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-</head>
-
-<body>
-
-<div class="container">
-
-    <h2>📝 Register</h2>
-
-    <form method="POST">
-
-        <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            required
-        >
-
-        <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-        >
-
-        <select name="role" required>
-            <option value="">Select Role</option>
-            <option value="Donor">Donor</option>
-            <option value="Receiver">Receiver</option>
-        </select>
-
-        <button type="submit">Register</button>
-
-    </form>
-
-    <p>Already have an account?</p>
-
-    <a href="/login">Login</a>
-
-</div>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Register | Smart Surplus{% endblock %}
+{% block content %}
+<section class="auth-layout">
+    <div class="auth-art"><span class="eyebrow">JOIN THE COMMUNITY</span><h1>Turn surplus into <em>something meaningful.</em></h1><p>Register once and start sharing food with your community.</p><div class="auth-food">🥗 🍚 🥘</div></div>
+    <div class="form-card">
+        <span class="eyebrow">CREATE ACCOUNT</span><h2>Welcome aboard 👋</h2><p class="muted">Fill in your details to get started.</p>
+        <form method="POST">
+            <label>Username</label><input type="text" name="username" placeholder="Choose a username" required>
+            <label>Password</label><input type="password" name="password" placeholder="Create a password" required>
+            <label>Role</label>
+            <select name="role" required><option value="">Select your role</option><option value="Donor">Donor</option><option value="Receiver">Receiver</option></select>
+            <button class="btn btn-primary full" type="submit">Create Account →</button>
+        </form>
+        <p class="form-foot">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+</section>
+{% endblock %}

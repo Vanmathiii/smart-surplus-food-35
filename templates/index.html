@@ -1,30 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Smart Surplus Food Redistribution</title>
+{% extends "base.html" %}
+{% block title %}Home | Smart Surplus{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="hero-copy">
+        <span class="eyebrow">🌱 FOOD • PEOPLE • IMPACT</span>
+        <h1>Good food should<br><em>never go to waste.</em></h1>
+        <p>Connect surplus food with people who need it. Donate extra meals, discover available food, and make every contribution count.</p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="{{ url_for('register') }}">Start Sharing →</a>
+            <a class="btn btn-light" href="{{ url_for('food_list') }}">Explore Food</a>
+        </div>
+        <div class="trust-row">
+            <span>✓ Simple donation</span>
+            <span>✓ Transparent status</span>
+            <span>✓ Community impact</span>
+        </div>
+    </div>
+    <div class="hero-art">
+        <div class="sun"></div>
+        <div class="plate">🥘</div>
+        <div class="floating-card card-one">🍚 <strong>Fresh surplus</strong><small>Ready to share</small></div>
+        <div class="floating-card card-two">♻️ <strong>Less waste</strong><small>More community impact</small></div>
+    </div>
+</section>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-</head>
+<section class="section">
+    <div class="section-heading">
+        <span class="eyebrow">HOW IT WORKS</span>
+        <h2>From extra food to real impact</h2>
+    </div>
+    <div class="steps">
+        <article><span>01</span><div>📝</div><h3>Register</h3><p>Create an account as a donor or receiver.</p></article>
+        <article><span>02</span><div>🍛</div><h3>Share Food</h3><p>Add the food name, quantity and location.</p></article>
+        <article><span>03</span><div>🤝</div><h3>Redistribute</h3><p>Track the food as it moves toward collection.</p></article>
+    </div>
+</section>
 
-<body>
+<section class="impact-banner">
+    <div><span class="eyebrow">OUR MISSION</span><h2>Every meal shared is a little less waste.</h2></div>
+    <a class="btn btn-white" href="{{ url_for('register') }}">Become a contributor</a>
+</section>
 
-<div class="container">
-
-    <h1>🍱 Smart Surplus Food Redistribution System</h1>
-
-    <p>
-        Reduce food wastage by connecting surplus food
-        with people who need it.
-    </p>
-
-    <br>
-
-    <a href="/register" class="btn">Register</a>
-
-    <a href="/login" class="btn">Login</a>
-
-</div>
-
-</body>
-</html>
+<section class="admin-entry">
+    <div><div class="mini-icon">🛡️</div><div><h3>Administration</h3><p>Manage donations, users and food status from the admin dashboard.</p></div></div>
+    <a href="{{ url_for('admin_login') }}">Admin Login →</a>
+</section>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Manage Donations | Smart Surplus{% endblock %}
+{% block content %}
+<section class="dashboard-head"><div><span class="eyebrow">ADMIN • DONATIONS</span><h1>Donation Management</h1><p>Review every donation and update its redistribution status.</p></div></section>
+<div class="panel table-panel">
+    <div class="table-scroll"><table><thead><tr><th>Food</th><th>Quantity</th><th>Location</th><th>Donor</th><th>Status</th><th>Update</th></tr></thead><tbody>
+    {% for food in foods %}<tr><td><strong>{{ food['food_name'] }}</strong></td><td>{{ food['quantity'] }}</td><td>{{ food['location'] }}</td><td>{{ food['donor_username'] or 'Existing record' }}</td><td><span class="status {{ food['status']|lower }}">{{ food['status'] }}</span></td><td><form class="status-form" method="POST" action="{{ url_for('update_donation_status', food_id=food['id']) }}"><select name="status"><option {% if food['status']=='Available' %}selected{% endif %}>Available</option><option {% if food['status']=='Approved' %}selected{% endif %}>Approved</option><option {% if food['status']=='Rejected' %}selected{% endif %}>Rejected</option><option {% if food['status']=='Collected' %}selected{% endif %}>Collected</option></select><button class="small-btn" type="submit">Save</button></form></td></tr>{% endfor %}
+    </tbody></table></div>
+</div>
+{% endblock %}

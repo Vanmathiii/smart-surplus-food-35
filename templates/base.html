@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Smart Surplus{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="{{ url_for('index') }}">
+        <span class="brand-icon">🥗</span>
+        <span>Smart Surplus</span>
+    </a>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        {% if session.get('username') and session.get('role') == 'Admin' %}
+            <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+            <a href="{{ url_for('admin_donations') }}">Donations</a>
+            <a href="{{ url_for('admin_users') }}">Users</a>
+            <a href="{{ url_for('admin_logout') }}" class="nav-danger">Logout</a>
+        {% elif session.get('username') %}
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('food_list') }}">Food</a>
+            <a href="{{ url_for('logout') }}" class="nav-danger">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}" class="nav-cta">Join Us</a>
+        {% endif %}
+    </nav>
+</header>
+
+<main class="page-shell">
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <strong>Smart Surplus Food Redistribution</strong>
+    <span>Share food. Reduce waste. Create impact. 🌱</span>
+</footer>
+</body>
+</html>

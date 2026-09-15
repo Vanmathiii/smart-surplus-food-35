@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Users | Smart Surplus{% endblock %}
+{% block content %}
+<section class="dashboard-head"><div><span class="eyebrow">ADMIN • USERS</span><h1>User Management</h1><p>View registered donors, receivers and administrators.</p></div></section>
+<div class="panel table-panel"><div class="table-scroll"><table><thead><tr><th>ID</th><th>Username</th><th>Role</th></tr></thead><tbody>{% for user in users %}<tr><td>#{{ user['id'] }}</td><td><strong>{{ user['username'] }}</strong></td><td><span class="role-pill">{{ user['role'] }}</span></td></tr>{% endfor %}</tbody></table></div></div>
+{% endblock %}

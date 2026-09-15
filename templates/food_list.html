@@ -1,53 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Food Donations</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-</head>
-
-<body>
-
-<div class="container">
-
-    <h2>🍱 Available Surplus Food</h2>
-
-    {% if foods %}
-
-    <table>
-
-        <tr>
-            <th>Food</th>
-            <th>Quantity</th>
-            <th>Location</th>
-            <th>Status</th>
-        </tr>
-
-        {% for food in foods %}
-
-        <tr>
-            <td>{{ food["food_name"] }}</td>
-            <td>{{ food["quantity"] }}</td>
-            <td>{{ food["location"] }}</td>
-            <td>{{ food["status"] }}</td>
-        </tr>
-
-        {% endfor %}
-
-    </table>
-
-    {% else %}
-
-    <p>No food donations available.</p>
-
-    {% endif %}
-
-    <br>
-
-    <a href="/dashboard">Back to Dashboard</a>
-
+{% extends "base.html" %}
+{% block title %}Food Donations | Smart Surplus{% endblock %}
+{% block content %}
+<section class="dashboard-head">
+    <div><span class="eyebrow">COMMUNITY FOOD BOARD</span><h1>Available surplus food 🍱</h1><p>Explore the latest donations shared through the platform.</p></div>
+    {% if session.get('username') and session.get('role') != 'Admin' %}<a class="btn btn-primary" href="{{ url_for('donate') }}">+ Donate Food</a>{% endif %}
+</section>
+{% if foods %}
+<div class="food-grid">
+{% for food in foods %}
+    <article class="food-card">
+        <div class="food-card-top"><span class="food-emoji">{{ ['🍚','🥘','🍛','🥗','🍱'][loop.index0 % 5] }}</span><span class="status {{ food['status']|lower }}">{{ food['status'] }}</span></div>
+        <h3>{{ food["food_name"] }}</h3>
+        <div class="food-meta"><span>📦 {{ food["quantity"] }}</span><span>📍 {{ food["location"] }}</span></div>
+        {% if food["donor_username"] %}<small>Shared by {{ food["donor_username"] }}</small>{% endif %}
+    </article>
+{% endfor %}
 </div>
-
-</body>
-</html>
+{% else %}
+<div class="empty-state"><div>🍽️</div><h2>No food donations yet</h2><p>Be the first person to share surplus food.</p>{% if session.get('username') %}<a class="btn btn-primary" href="{{ url_for('donate') }}">Donate Food</a>{% endif %}</div>
+{% endif %}
+{% endblock %}

@@ -1,43 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-</head>
-
-<body>
-
-<div class="container">
-
-    <h2>🔐 Login</h2>
-
-    <form method="POST">
-
-        <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            required
-        >
-
-        <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-        >
-
-        <button type="submit">Login</button>
-
-    </form>
-
-    <p>Don't have an account?</p>
-
-    <a href="/register">Register</a>
-
-</div>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Login | Smart Surplus{% endblock %}
+{% block content %}
+<section class="auth-layout">
+    <div class="auth-art login-art"><span class="eyebrow">WELCOME BACK</span><h1>Let's keep good food <em>moving.</em></h1><p>Login to manage your donations and discover the latest food available in your community.</p><div class="auth-food">🍱 ♻️ 🤝</div></div>
+    <div class="form-card">
+        <span class="eyebrow">SIGN IN</span><h2>Good to see you!</h2><p class="muted">Enter your account details.</p>
+        <form method="POST">
+            <label>Username</label><input type="text" name="username" placeholder="Your username" required>
+            <label>Password</label><input type="password" name="password" placeholder="Your password" required>
+            <button class="btn btn-primary full" type="submit">Login →</button>
+        </form>
+        <div class="divider"><span>or</span></div>
+        <a class="btn btn-light full" href="{{ url_for('admin_login') }}">🛡️ Admin Login</a>
+        <p class="form-foot">Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+    </div>
+</section>
+{% endblock %}

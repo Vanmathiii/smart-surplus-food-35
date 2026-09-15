@@ -1,52 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Donate Food</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-</head>
-
-<body>
-
-<div class="container">
-
-    <h2>🍛 Donate Surplus Food</h2>
-
-    <form method="POST">
-
-        <input
-            type="text"
-            name="food_name"
-            placeholder="Food Name"
-            required
-        >
-
-        <input
-            type="text"
-            name="quantity"
-            placeholder="Quantity (e.g. 20 meals)"
-            required
-        >
-
-        <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            required
-        >
-
-        <button type="submit">
-            Add Food
-        </button>
-
-    </form>
-
-    <br>
-
-    <a href="/dashboard">Back to Dashboard</a>
-
-</div>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Donate Food | Smart Surplus{% endblock %}
+{% block content %}
+<section class="form-page">
+    <div class="form-intro"><span class="eyebrow">SHARE WHAT YOU HAVE</span><h1>Donate surplus food <em>today.</em></h1><p>Add a few details and your donation will appear in the food listing.</p><div class="big-food">🍛</div></div>
+    <div class="form-card wide">
+        <span class="eyebrow">DONATION DETAILS</span><h2>Tell us about the food</h2>
+        <form method="POST">
+            <label>Food Name</label><input type="text" name="food_name" placeholder="e.g. Vegetable Rice" required>
+            <label>Quantity</label><input type="text" name="quantity" placeholder="e.g. 2 kg or 20 meals" required>
+            <label>Location</label><input type="text" name="location" placeholder="e.g. Coimbatore" required>
+            <button class="btn btn-primary full" type="submit">Add Donation →</button>
+        </form>
+        <a class="back-link" href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+    </div>
+</section>
+{% endblock %}

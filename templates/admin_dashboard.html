@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard | Smart Surplus{% endblock %}
+{% block content %}
+<section class="dashboard-head admin-head"><div><span class="eyebrow">ADMIN CONTROL CENTER</span><h1>Good morning, Admin 🛡️</h1><p>Monitor donations and keep redistribution moving.</p></div><a class="btn btn-primary" href="{{ url_for('admin_donations') }}">Manage Donations →</a></section>
+<div class="metric-grid">
+    <div class="metric"><span>Total Donations</span><strong>{{ total_food }}</strong><small>All food records</small></div>
+    <div class="metric"><span>Available</span><strong>{{ available }}</strong><small>Waiting for action</small></div>
+    <div class="metric"><span>Approved</span><strong>{{ approved }}</strong><small>Ready to collect</small></div>
+    <div class="metric"><span>Collected</span><strong>{{ collected }}</strong><small>Successfully moved</small></div>
+    <div class="metric"><span>Users</span><strong>{{ total_users }}</strong><small>Registered accounts</small></div>
+</div>
+<section class="admin-grid">
+    <div class="panel"><div class="panel-title"><h2>Recent Donations</h2><a href="{{ url_for('admin_donations') }}">View all</a></div>
+        {% if recent_food %}<div class="mini-table">{% for food in recent_food %}<div class="mini-row"><span class="food-name">{{ food['food_name'] }}</span><span>{{ food['quantity'] }}</span><span>{{ food['location'] }}</span><span class="status {{ food['status']|lower }}">{{ food['status'] }}</span></div>{% endfor %}</div>{% else %}<p class="muted">No donations yet.</p>{% endif %}
+    </div>
+    <div class="panel quick-admin"><h2>Quick Management</h2><a href="{{ url_for('admin_donations') }}">🍱 Donation Management</a><a href="{{ url_for('admin_users') }}">👥 User Management</a><a href="{{ url_for('admin_analytics') }}">📈 Analytics</a></div>
+</section>
+{% endblock %}

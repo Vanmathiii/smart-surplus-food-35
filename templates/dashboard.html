@@ -1,37 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-</head>
-
-<body>
-
-<div class="container">
-
-    <h1>Welcome, {{ username }} 👋</h1>
-
-    <h3>Role: {{ role }}</h3>
-
-    <div class="menu">
-
-        <a href="/donate" class="btn">
-            🍛 Donate Surplus Food
-        </a>
-
-        <a href="/food" class="btn">
-            📋 View Food Donations
-        </a>
-
-        <a href="/logout" class="btn logout">
-            Logout
-        </a>
-
-    </div>
-
-</div>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Dashboard | Smart Surplus{% endblock %}
+{% block content %}
+<section class="dashboard-head">
+    <div><span class="eyebrow">DONOR SPACE</span><h1>Welcome, {{ username }} 👋</h1><p>You're helping good food reach the right people.</p></div>
+    <span class="role-pill">{{ role }}</span>
+</section>
+<section class="stat-grid">
+    <div class="stat-card"><span>🥗</span><strong>Share Food</strong><p>Donate surplus meals in a few clicks.</p></div>
+    <div class="stat-card"><span>📋</span><strong>View Listings</strong><p>See all available surplus food.</p></div>
+    <div class="stat-card"><span>♻️</span><strong>Make an Impact</strong><p>Reduce waste and support your community.</p></div>
+</section>
+<section class="action-panel">
+    <div><span class="eyebrow">QUICK ACTIONS</span><h2>What would you like to do?</h2></div>
+    <div class="action-buttons"><a class="btn btn-primary" href="{{ url_for('donate') }}">🍛 Donate Surplus Food</a><a class="btn btn-light" href="{{ url_for('food_list') }}">📋 View Food Donations</a></div>
+</section>
+{% endblock %}
