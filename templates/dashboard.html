@@ -12,6 +12,12 @@
 </section>
 <section class="action-panel">
     <div><span class="eyebrow">QUICK ACTIONS</span><h2>What would you like to do?</h2></div>
-    <div class="action-buttons"><a class="btn btn-primary" href="{{ url_for('donate') }}">🍛 Donate Surplus Food</a><a class="btn btn-light" href="{{ url_for('food_list') }}">📋 View Food Donations</a></div>
-</section>
+    <div class="action-buttons">
+    {% if role == "Donor" %}
+        <a class="btn btn-primary" href="{{ url_for('donate') }}">🍛 Donate Surplus Food</a>
+        <a class="btn btn-secondary" href="{{ url_for('food_list') }}">📋 View Food Donations</a>
+    {% elif role == "Receiver" %}
+        <a class="btn btn-primary" href="{{ url_for('food_list') }}">🍱 Find Available Food</a>
+    {% endif %}
+</div>
 {% endblock %}
