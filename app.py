@@ -49,6 +49,9 @@ def init_db():
              role = excluded.role
     """, ("admin", "admin123", "Admin"))
 
+    conn.commit()
+    conn.close()
+
 # ---------------- USER AUTH ----------------
 @app.route("/")
 def index():
