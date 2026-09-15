@@ -3,8 +3,7 @@
 {% block content %}
 <section class="dashboard-head">
     <div><span class="eyebrow">COMMUNITY FOOD BOARD</span><h1>Available surplus food 🍱</h1><p>Explore the latest donations shared through the platform.</p></div>
-    {% if session.get('username') and session.get('role') != 'Admin' %}<a class="btn btn-primary" href="{{ url_for('donate') }}">+ Donate Food</a>{% endif %}
-</section>
+    {% if session.get('username') and session.get('role') == 'Donor' %}
 {% if foods %}
 <div class="food-grid">
 {% for food in foods %}
