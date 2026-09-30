@@ -34,7 +34,7 @@ def init_db():
             donor_username TEXT
         )
     """)
-        conn.execute("""
+    conn.execute("""
         CREATE TABLE IF NOT EXISTS food_requests (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             food_id INTEGER NOT NULL,
