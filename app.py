@@ -34,6 +34,16 @@ def init_db():
             donor_username TEXT
         )
     """)
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS food_requests (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            food_id INTEGER NOT NULL,
+            receiver_username TEXT NOT NULL,
+            quantity TEXT NOT NULL,
+            status TEXT DEFAULT 'Pending',
+            request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
 
     # Safe migration for databases created by the original 35% prototype.
     columns = [row["name"] for row in conn.execute("PRAGMA table_info(food)").fetchall()]
