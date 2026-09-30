@@ -4,15 +4,33 @@
 <section class="dashboard-head">
     <div><span class="eyebrow">COMMUNITY FOOD BOARD</span><h1>Available surplus food 🍱</h1><p>Explore the latest donations shared through the platform.</p></div>
     {% if session.get('username') and session.get('role') == 'Donor' %}<a class="btn btn-primary" href="{{ url_for('donate') }}">+ Donate Food</a>{% endif %}
-{% if foods %}
-<div class="food-grid">
 {% for food in foods %}
+
     <article class="food-card">
-        <div class="food-card-top"><span class="food-emoji">{{ ['🍚','🥘','🍛','🥗','🍱'][loop.index0 % 5] }}</span><span class="status {{ food['status']|lower }}">{{ food['status'] }}</span></div>
+
+        <div class="food-card-top">
+            ...
+        </div>
+
         <h3>{{ food["food_name"] }}</h3>
-        <div class="food-meta"><span>📦 {{ food["quantity"] }}</span><span>📍 {{ food["location"] }}</span></div>
-        {% if food["donor_username"] %}<small>Shared by {{ food["donor_username"] }}</small>{% endif %}
+
+        <div class="food-meta">
+            ...
+        </div>
+
+        {% if food["donor_username"] %}
+            <small>Shared by {{ food["donor_username"] }}</small>
+        {% endif %}
+
+        {% if session.get('role') == 'Receiver' and food['status'] == 'Available' %}
+            <a class="btn btn-primary"
+               href="{{ url_for('request_food', food_id=food['id']) }}">
+                🍱 Request Food
+            </a>
+        {% endif %}
+
     </article>
+
 {% endfor %}
 </div>
 {% else %}
