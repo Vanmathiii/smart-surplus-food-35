@@ -177,6 +177,37 @@ def food_list():
 
     return render_template("food_list.html", foods=foods)
 
+@app.route("/request-food/<int:food_id>")
+def request_food(food_id):
+    if "username" not in session or session.get("role") != "Receiver":
+        return redirect(url_for("index"))
+
+    conn = get_db()
+
+    food = conn.execute(
+        "SELECT * FROM food WHERE id = ?",
+        (food_id,)
+    ).fetchone()
+
+    if not food:
+        conn.close()
+        return "Food not found", 404
+
+    if food["status"] != "Available":
+        conn.close()
+        return "This food is no longer available", 400
+
+    conn.execute(
+        "UPDATE food SET status = 'Requested' WHERE id = ?",
+        (food_id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("food_list"))
+
+
 
 # ---------------- ADMIN ----------------
 def admin_required():
