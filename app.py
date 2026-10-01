@@ -198,15 +198,12 @@ def request_food(food_id):
         conn.close()
         return "This food is no longer available", 400
 
-    conn.execute(
-        """
+    conn.execute("""
         INSERT INTO food_requests
-        (food_id, receiver_username, status)
-        VALUES (?, ?, 'Pending')
-        """,
-       (food_id, session["username"])
-)
-    
+        (food_id, receiver_username, quantity, status)
+        VALUES (?, ?, ?, 'Pending')
+    """, (food_id, session["username"], food["quantity"]))
+
     conn.execute(
         "UPDATE food SET status = 'Requested' WHERE id = ?",
         (food_id,)
