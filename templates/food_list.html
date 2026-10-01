@@ -35,6 +35,16 @@
 {% endfor %}
 </div>
 {% else %}
-<div class="empty-state"><div>🍽️</div><h2>No food donations yet</h2><p>Be the first person to share surplus food.</p>{% if session.get('username') %}<a class="btn btn-primary" href="{{ url_for('donate') }}">Donate Food</a>{% endif %}</div>
+<div class="empty-state">
+    <div>🍽️</div>
+    <h2>No food donations yet</h2>
+    <p>Be the first person to share surplus food.</p>
+
+    {% if session.get('role') == 'Donor' %}
+        <a class="btn btn-primary" href="{{ url_for('donate') }}">
+            Donate Food
+        </a>
+    {% endif %}
+</div>
 {% endif %}
 {% endblock %}
