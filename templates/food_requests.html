@@ -31,6 +31,19 @@
                 <p>👤 Requested by {{ req["receiver_username"] }}</p>
                 <p>🍽️ Quantity: {{ req["quantity"] }}</p>
                 <p>📌 Status: {{ req["status"] }}</p>
+                {% if req["status"] == "Pending" %}
+                   <div class="action-buttons">
+                       <a class="btn btn-primary"
+                          href="{{ url_for('approve_request', request_id=req['id']) }}">
+                           ✅ Approve
+                       </a>
+
+                       <a class="btn btn-secondary"
+                          href="{{ url_for('reject_request', request_id=req['id']) }}">
+                           ❌ Reject
+                       </a>
+            </div>
+{% endif %}
             </div>
 
         </article>
