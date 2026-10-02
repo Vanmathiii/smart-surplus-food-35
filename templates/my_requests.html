@@ -32,6 +32,14 @@
                 <p>🍽️ Quantity: {{ req["quantity"] }}</p>
                 <p>📅 Requested: {{ req["request_date"] }}</p>
                 <p>📌 Status: {{ req["status"] }}</p>
+{% if req["status"] == "Ready" %}
+    <div class="action-buttons">
+        <a class="btn btn-primary"
+           href="{{ url_for('collect_request', request_id=req['id']) }}">
+            ✅ Mark as Collected
+        </a>
+    </div>
+{% endif %}
             </div>
 
         </article>
