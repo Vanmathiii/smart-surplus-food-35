@@ -234,6 +234,30 @@ def food_requests():
     conn.close()
 
     return render_template("food_requests.html", requests=requests)
+
+
+
+@app.route("/my-requests")
+def my_requests():
+    if "username" not in session or session.get("role") != "Receiver":
+        return redirect(url_for("index"))
+
+    conn = get_db()
+
+    requests = conn.execute("""
+        SELECT food_requests.*, food.food_name, food.location, food.donor_username
+        FROM food_requests
+        JOIN food ON food_requests.food_id = food.id
+        WHERE food_requests.receiver_username = ?
+        ORDER BY food_requests.request_date DESC
+    """, (session["username"],)).fetchall()
+
+    conn.close()
+
+    return render_template("my_requests.html", requests=requests)
+
+
+
 # ---------------- ADMIN ----------------
 def admin_required():
     return "username" in session and session.get("role") == "Admin"
