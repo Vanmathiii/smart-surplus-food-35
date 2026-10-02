@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Food Requests | Smart Surplus{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-head">
+    <div>
+        <span class="eyebrow">DONOR REQUESTS</span>
+        <h1>Food Requests 📩</h1>
+        <p>Manage requests received for your donated food.</p>
+    </div>
+</section>
+
+<section class="food-grid">
+
+    {% if requests %}
+
+        {% for req in requests %}
+
+        <article class="food-card">
+
+            <div class="food-card-top">
+                <span>🍱</span>
+            </div>
+
+            <h3>{{ req["food_name"] }}</h3>
+
+            <div class="food-meta">
+                <p>📍 {{ req["location"] }}</p>
+                <p>👤 Requested by {{ req["receiver_username"] }}</p>
+                <p>🍽️ Quantity: {{ req["quantity"] }}</p>
+                <p>📌 Status: {{ req["status"] }}</p>
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-state">
+            <div>📭</div>
+            <h2>No food requests yet</h2>
+            <p>Receiver requests will appear here.</p>
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
