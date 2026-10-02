@@ -44,6 +44,14 @@
                        </a>
             </div>
 {% endif %}
+        {% if req["status"] == "Approved" %}
+            <div class="action-buttons">
+                <a class="btn btn-primary"
+                   href="{{ url_for('ready_request', request_id=req['id']) }}">
+                   📦 Mark as Ready
+                </a>
+            </div>
+{% endif %}
             </div>
 
         </article>
