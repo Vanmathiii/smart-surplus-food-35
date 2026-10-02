@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}My Food Requests | Smart Surplus{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-head">
+    <div>
+        <span class="eyebrow">MY REQUESTS</span>
+        <h1>My Food Requests 📩</h1>
+        <p>Track the food requests you have submitted.</p>
+    </div>
+</section>
+
+<section class="food-grid">
+
+    {% if requests %}
+
+        {% for req in requests %}
+
+        <article class="food-card">
+
+            <div class="food-card-top">
+                <span>🍱</span>
+            </div>
+
+            <h3>{{ req["food_name"] }}</h3>
+
+            <div class="food-meta">
+                <p>📍 {{ req["location"] }}</p>
+                <p>👤 Donor: {{ req["donor_username"] }}</p>
+                <p>🍽️ Quantity: {{ req["quantity"] }}</p>
+                <p>📅 Requested: {{ req["request_date"] }}</p>
+                <p>📌 Status: {{ req["status"] }}</p>
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-state">
+            <div>📭</div>
+            <h2>No food requests yet</h2>
+            <p>You have not requested any food yet.</p>
+
+            <a class="btn btn-primary" href="{{ url_for('food_list') }}">
+                🍱 Find Available Food
+            </a>
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
