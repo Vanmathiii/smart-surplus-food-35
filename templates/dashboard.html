@@ -17,8 +17,14 @@
         <a class="btn btn-primary" href="{{ url_for('donate') }}">🍛 Donate Surplus Food</a>
         <a class="btn btn-secondary" href="{{ url_for('food_list') }}">📋 View Food Donations</a>
         <a class="btn btn-secondary" href="{{ url_for('food_requests') }}">📩 Food Requests</a>
-    {% elif role == "Receiver" %}
-        <a class="btn btn-primary" href="{{ url_for('food_list') }}">🍱 Find Available Food</a>
-    {% endif %}
+     {% elif role == "Receiver" %}
+        <a class="btn btn-primary" href="{{ url_for('food_list') }}">
+           🍱 Find Available Food
+        </a>
+
+        <a class="btn btn-secondary" href="{{ url_for('my_requests') }}">
+           📩 My Food Requests
+        </a>
+{% endif %}
 </div>
 {% endblock %}
