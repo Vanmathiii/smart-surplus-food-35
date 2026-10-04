@@ -332,6 +332,34 @@ def ready_request(request_id):
     if "username" not in session or session.get("role") != "Donor":
         return redirect(url_for("index"))
 
+    conn = get_db()
+
+    request_data = conn.execute("""
+        SELECT food_requests.*, food.donor_username
+        FROM food_requests
+        JOIN food ON food_requests.food_id = food.id
+        WHERE food_requests.id = ?
+    """, (request_id,)).fetchone()
+
+    if not request_data:
+        conn.close()
+        return "Request not found", 404
+
+    if request_data["donor_username"] != session["username"]:
+        conn.close()
+        return "Unauthorized", 403
+
+    conn.execute("""
+        UPDATE food_requests
+        SET status = 'Ready'
+        WHERE id = ?
+    """, (request_id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("food_requests"))
+
 
 
 @app.route("/collect-request/<int:request_id>")
