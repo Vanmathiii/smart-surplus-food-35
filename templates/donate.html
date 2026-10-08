@@ -6,9 +6,24 @@
     <div class="form-card wide">
         <span class="eyebrow">DONATION DETAILS</span><h2>Tell us about the food</h2>
         <form method="POST">
-            <label>Food Name</label><input type="text" name="food_name" placeholder="e.g. Vegetable Rice" required>
-            <label>Quantity</label><input type="text" name="quantity" placeholder="e.g. 2 kg or 20 meals" required>
-            <label>Location</label><input type="text" name="location" placeholder="e.g. Coimbatore" required>
+            <label>Food Name</label>
+            <input type="text" name="food_name" placeholder="e.g. Vegetable Rice" required>
+            <label>Quantity</label>
+            <input type="text" name="quantity" placeholder="e.g. 2 kg or 20 meals" required>
+            <label>Location</label>
+<input type="text"
+       name="location"
+       id="location"
+       placeholder="e.g. Coimbatore"
+       required>
+
+<input type="hidden" name="latitude" id="latitude">
+<input type="hidden" name="longitude" id="longitude">
+
+<button type="button" onclick="getLocation()">
+    📍 Use My Current Location
+</button>
+            
             <button class="btn btn-primary full" type="submit">Add Donation →</button>
         </form>
         <a class="back-link" href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
