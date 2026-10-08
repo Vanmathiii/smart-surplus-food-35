@@ -48,9 +48,16 @@ def init_db():
 
     # Safe migration for databases created by the original 35% prototype.
     columns = [row["name"] for row in conn.execute("PRAGMA table_info(food)").fetchall()]
+
     if "donor_username" not in columns:
         conn.execute("ALTER TABLE food ADD COLUMN donor_username TEXT")
 
+    if "latitude" not in columns:
+        conn.execute("ALTER TABLE food ADD COLUMN latitude REAL")
+
+    if "longitude" not in columns:
+        conn.execute("ALTER TABLE food ADD COLUMN longitude REAL")
+  
         # Prototype admin account
     conn.execute("""
          INSERT INTO users (username, password, role)
