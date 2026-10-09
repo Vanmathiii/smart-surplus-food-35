@@ -161,8 +161,8 @@ def donate():
         conn = get_db()
         conn.execute("""
             INSERT INTO food
-            (food_name, quantity, location, status, donor_username)
-            VALUES (?, ?, ?, ?, ?)
+            (food_name, quantity, location, latitude, longitude, status, donor_username)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (
             food_name,
             quantity,
