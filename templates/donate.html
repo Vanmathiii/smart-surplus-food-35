@@ -29,4 +29,32 @@
         <a class="back-link" href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
     </div>
 </section>
+<script>
+function getLocation() {
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+
+                document.getElementById("latitude").value =
+                    position.coords.latitude;
+
+                document.getElementById("longitude").value =
+                    position.coords.longitude;
+
+                document.getElementById("location").value =
+                    "Current Location";
+
+                alert("📍 Location detected successfully!");
+            },
+            function(error) {
+                alert("Unable to get your location. Please allow location access.");
+            }
+        );
+
+    } else {
+        alert("Geolocation is not supported by your browser.");
+    }
+}
+</script>
 {% endblock %}
