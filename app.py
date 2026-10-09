@@ -155,6 +155,9 @@ def donate():
         quantity = request.form["quantity"].strip()
         location = request.form["location"].strip()
 
+        latitude = request.form.get("latitude")
+        longitude = request.form.get("longitude")
+
         conn = get_db()
         conn.execute("""
             INSERT INTO food
