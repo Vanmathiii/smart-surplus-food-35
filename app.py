@@ -190,6 +190,27 @@ def food_list():
 
     return render_template("food_list.html", foods=foods)
 
+
+@app.route("/nearby-food")
+def nearby_food():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    conn = get_db()
+
+    foods = conn.execute("""
+        SELECT *
+        FROM food
+        WHERE status = 'Available'
+        AND latitude IS NOT NULL
+        AND longitude IS NOT NULL
+        ORDER BY id DESC
+    """).fetchall()
+
+    conn.close()
+
+    return render_template("nearby_food.html", foods=foods)
+
 @app.route("/request-food/<int:food_id>")
 def request_food(food_id):
     if "username" not in session or session.get("role") != "Receiver":
