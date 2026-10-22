@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Nearby Food | Smart Surplus{% endblock %}
+
+{% block content %}
+
+<section class="form-page">
+
+    <div class="form-intro">
+        <span class="eyebrow">LOCATION BASED FOOD</span>
+
+        <h1>Find food <em>nearby.</em></h1>
+
+        <p>
+            Discover available surplus food donations based on location.
+        </p>
+
+        <div class="big-food">📍</div>
+    </div>
+
+
+    <div class="form-card wide">
+
+        <span class="eyebrow">AVAILABLE FOOD</span>
+
+        <h2>Nearby Food Donations</h2>
+
+        {% if foods %}
+
+            {% for food in foods %}
+
+            <div class="food-item">
+
+                <h3>🍱 {{ food["food_name"] }}</h3>
+
+                <p>
+                    <strong>Quantity:</strong>
+                    {{ food["quantity"] }}
+                </p>
+
+                <p>
+                    <strong>Location:</strong>
+                    {{ food["location"] }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {{ food["status"] }}
+                </p>
+
+                <a
+                    href="{{ url_for('request_food', food_id=food['id']) }}"
+                    class="btn btn-primary"
+                >
+                    Request Food →
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No nearby food donations available.</p>
+
+        {% endif %}
+
+        <a class="back-link" href="{{ url_for('dashboard') }}">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
